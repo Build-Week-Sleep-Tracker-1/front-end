@@ -1,6 +1,7 @@
 const initialState = {
     users: "Loading users...",
-    welcomeMessage: "Loading message..."
+    welcomeMessage: "Loading message...",
+    userEntries: null,
 }
 
 
@@ -18,7 +19,7 @@ export const reducer = (state = initialState, action) => {
             return { ...state }
         case "GET_USER_ENTRIES":
             console.log("GET_USER_ENTRIES called from reducer", action.payload)
-            return { ...state }
+            return { ...state, userEntries: action.payload }
         case "GET_ENTRY":
             console.log("GET_ENTRY called from reducer", action.payload)
             return{ ...state }
