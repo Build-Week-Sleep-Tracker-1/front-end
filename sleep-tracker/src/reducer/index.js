@@ -23,16 +23,16 @@ export const reducer = (state = initialState, action) => {
             return { ...state, userEntries: action.payload }
         case "GET_ENTRY":
             console.log("GET_ENTRY called from reducer", action.payload)
-            return{ ...state }
+            return { ...state }
         case "CREATE_ENTRY":
             console.log("CREATE_ENTRY called from reducer", action.payload)
-            return({ ...state})
+            return { ...state, userEntries: [ ...state.userEntries, action.payload ] }
         case "EDIT_ENTRY":
             console.log("EDIT_ENTRY called from reducer", action.payload)
-            return({ ...state})
+            return { ...state}
         case "DELETE_ENTRY":
             console.log("DELETE_ENTRY called from reducer", action.payload)
-            return({ ...state})
+            return { ...state, userEntries: state.userEntries.filter(item => item.id !== action.payload)}
         default:
             return state;
     }

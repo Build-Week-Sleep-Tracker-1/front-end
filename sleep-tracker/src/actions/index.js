@@ -75,7 +75,7 @@ export const createEntry = (userId, entry) => {
         axiosWithAuth()
             .post(`/users/${userId}/entries`, entry)
             .then(res => {
-                dispatch({ type: "CREATE_ENTRY", payload: res })
+                dispatch({ type: "CREATE_ENTRY", payload: res.data })
             })
             .catch(err => console.log("Error from createEntry call in actions", err));
     }
@@ -99,7 +99,7 @@ export const deleteEntry = (userId, entryId) => {
         axiosWithAuth()
             .delete(`/users/${userId}/entries/${entryId}`)
             .then(res => {
-                dispatch({ type: "DELETE_ENTRY", payload: res })
+                dispatch({ type: "DELETE_ENTRY", payload: entryId })
             })
             .catch(err => console.log("Error from deleteEntry call in actions", err));
     }

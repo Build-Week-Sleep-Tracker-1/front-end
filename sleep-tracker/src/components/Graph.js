@@ -20,7 +20,9 @@ function formatData(data) {
 function Graph(props) {
     return (
         <Div>
-            {!props.userEntries ? <h2>Loading Graph...</h2> : 
+            {
+            !props.userEntries ? <h2>Loading Graph...</h2> : 
+            props.userEntries.length === 0 ? <h3>No Info To Display...</h3> : 
             <BarChart width={1900} height={200} data={formatData(props.userEntries)}>
                 <Bar dataKey="total_time" fill="#42bcf5"/>
                 <XAxis dataKey="date"/>
