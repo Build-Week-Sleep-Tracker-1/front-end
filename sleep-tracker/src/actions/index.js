@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { axiosWithAuth } from '../util/axiosWithAuth';
 
-// registers a new user *UNTESTED*
+// registers a new user *WORKING*
 export const register = (newUser) => {
     return dispatch => {
         axios
@@ -14,7 +14,7 @@ export const register = (newUser) => {
 }
 
 
-// logs the user in *TESTED*
+// logs the user in *WORKING*
 export const login = (user) => {
     return dispatch => {
         axios
@@ -27,7 +27,7 @@ export const login = (user) => {
     }
 }
 
-// gets the array of all the users *TESTED*
+// gets the array of all the users *WORKING*
 export const getUsers = () => {
     return dispatch => {
         axios
@@ -45,7 +45,7 @@ export const getUsers = () => {
 ********************************************************************    
 */
 
-// gets all the entries that a specific user made *TESTED*
+// gets all the entries that a specific user made *WORKING*
 export const getUserEntries = (userId) => {
     return dispatch => {
         axiosWithAuth()
@@ -57,7 +57,7 @@ export const getUserEntries = (userId) => {
     }
 }
 
-// gets a specifed entry from specifed user *TESTED*
+// gets a specifed entry from specifed user *WORKING*
 export const getEntry = (userId, entryId) => {
     return dispatch => {
         axiosWithAuth()
@@ -69,19 +69,19 @@ export const getEntry = (userId, entryId) => {
     }
 }
 
-// creates an entry for a specifed user *TESTED*
+// creates an entry for a specifed user *WORKING*
 export const createEntry = (userId, entry) => {
     return dispatch => {
         axiosWithAuth()
             .post(`/users/${userId}/entries`, entry)
             .then(res => {
-                dispatch({ type: "CREATE_ENTRY", payload: res })
+                dispatch({ type: "CREATE_ENTRY", payload: res.data })
             })
             .catch(err => console.log("Error from createEntry call in actions", err));
     }
 } 
 
-// edits specifed entry from specifed user *TESTED*
+// edits specifed entry from specifed user *WORKING*
 export const editEntry = (userId, entryId, entry) => {
     return dispatch => {
         axiosWithAuth()
@@ -93,13 +93,13 @@ export const editEntry = (userId, entryId, entry) => {
     }
 }
 
-// deletes specifed entry from specifed user *TESTED*
+// deletes specifed entry from specifed user *WORKING*
 export const deleteEntry = (userId, entryId) => {
     return dispatch => {
         axiosWithAuth()
             .delete(`/users/${userId}/entries/${entryId}`)
             .then(res => {
-                dispatch({ type: "DELETE_ENTRY", payload: res })
+                dispatch({ type: "DELETE_ENTRY", payload: entryId })
             })
             .catch(err => console.log("Error from deleteEntry call in actions", err));
     }

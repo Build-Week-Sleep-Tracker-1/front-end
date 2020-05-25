@@ -1,7 +1,8 @@
 const initialState = {
-    users: "Loading users...",
-    welcomeMessage: "Loading message...",
-    userEntries: null,
+    name: null,
+    age: null,
+    userId: null,
+    userEntries: null
 }
 
 
@@ -13,7 +14,7 @@ export const reducer = (state = initialState, action) => {
             return { ...state }
         case "LOGIN":
             console.log("LOGIN called from reducer", action.payload)
-            return { ...state }
+            return { ...state, name: action.payload.name, age: action.payload.age, userId: action.payload.userId, userEntries: action.payload.entries }
         case "GET_USERS":
             console.log("GET_USERS called from reducer", action.payload)
             return { ...state }
@@ -22,16 +23,16 @@ export const reducer = (state = initialState, action) => {
             return { ...state, userEntries: action.payload }
         case "GET_ENTRY":
             console.log("GET_ENTRY called from reducer", action.payload)
-            return{ ...state }
+            return { ...state }
         case "CREATE_ENTRY":
             console.log("CREATE_ENTRY called from reducer", action.payload)
-            return({ ...state})
+            return { ...state, userEntries: [ ...state.userEntries, action.payload ] }
         case "EDIT_ENTRY":
             console.log("EDIT_ENTRY called from reducer", action.payload)
-            return({ ...state})
+            return { ...state}
         case "DELETE_ENTRY":
             console.log("DELETE_ENTRY called from reducer", action.payload)
-            return({ ...state})
+            return { ...state, userEntries: state.userEntries.filter(item => item.id !== action.payload)}
         default:
             return state;
     }

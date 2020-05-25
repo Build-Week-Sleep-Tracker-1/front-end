@@ -12,15 +12,21 @@ const Nav = styled.nav`
     width: 100%;
 `
 
+
+
 function Navigation(props) {
     return (
         <>
             <Nav>
-                <p>Welcome</p>
+                {!props.name ? <p>Loading welcome...</p> : <p>Welcome {props.name}</p>}
                 <Link to="login">Log out</Link>
             </Nav>
         </>
     )
 }
 
-export default connect()(Navigation);
+export default connect((state) => {
+    return {
+        name: state.name
+    }
+})(Navigation);
