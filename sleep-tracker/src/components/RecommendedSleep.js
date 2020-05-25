@@ -49,21 +49,21 @@ function RecommendedSleep(props) {
 
                 props.userEntries.length < 30 ? // should be < 30
 
-                <P>You currently have {props.userEntries.length} {props.userEntries.length === 1 ? "entry" : "entries"}. 
+                <P>(You currently have {props.userEntries.length} {props.userEntries.length === 1 ? "entry" : "entries"}. 
                 Once you have entered 30 or more entries we will 
-                update this area with the recommended amount of hours that you should sleep.</P>
+                update this area with the recommended amount of hours that you should sleep.)</P>
 
                 : 
             
                 
                 recommendedAmount(props.userEntries) === 0 ? 
 
-                <P>{noHappyEntires}</P>
+                <P>({noHappyEntires})</P>
 
                 : 
                 <>
                     <H4>{recommendedAmount(props.userEntries)} hours per night</H4>
-                    <P>Since it is the lowest amount of sleep that you need to be in your happiest mood. </P>
+                    <P>(Since it is the lowest amount of sleep that you need to be in your happiest mood.)</P>
                 </>
             }
         </Div>
