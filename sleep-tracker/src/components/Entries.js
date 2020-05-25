@@ -10,7 +10,6 @@ const DivTop = styled.div`
     justify-content: center;
     flex-wrap: wrap;
 `
-
 const DivBottom = styled.div`
     border-bottom: 5px solid grey;
     padding-bottom: .5%;

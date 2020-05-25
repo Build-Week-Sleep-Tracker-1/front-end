@@ -5,18 +5,15 @@ import styled from 'styled-components';
 const Div = styled.div`
     margin-bottom: 5%;
 `
-
 const H2 = styled.h2`
     margin-bottom: 0;
 `
-
 const H4 = styled.h4`
     margin: 0;
     padding: 0;
     font-size: 3rem;
     color: #42bcf5;
 `
-
 const P = styled.p`
     font-style: italic;
 `
