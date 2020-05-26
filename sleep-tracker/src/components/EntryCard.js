@@ -36,7 +36,7 @@ const DataP = styled.p`
 function Entries(props) {
     const [ editing, setEditing ] = useState(false);
     const [ formState, setFormState ] = useState({
-        date: new Date(),
+        date: "",
         // ADD CURENT YEAR ONSUBMIT
         sleep_start: "",
         sleep_end: "",
@@ -45,13 +45,31 @@ function Entries(props) {
     });
 
     const formatData = () => {
+        const [ formatedDate, totalHours ] = formatThisDate(formState.date, formState.sleep_start.getHours(), formState.sleep_end.getHours())
+
         return (
             {
                 ...formState,
-                date: formatThisDate(formState.date)
+                date: formatedDate,
+                sleep_start: formState.sleep_start.getHours(),
+                sleep_end: formState.sleep_end.getHours(),    
+                mood_score: parseInt(formState.mood_score),
+                total_time: totalHours 
             }
         )
     }
+
+        // return (
+        //     {
+        //         ...formState,
+        //         date: formState.date === "" ? props.entry.date : formatedDate,
+        //         sleep_start: formState.sleep_start === "" ? props.entry.sleep_start : formState.sleep_start.getHours(),
+        //         sleep_end: formState.sleep_end === "" ? props.entry.sleep_end : formState.sleep_end.getHours(),    
+        //         mood_score: formState.mood_score === "" ? props.entry.mood_score : parseInt(formState.mood_score),
+        //         total_time: totalHours 
+        //     }
+        // )
+    
 
     const handleChange = e => {
         setFormState({
@@ -61,19 +79,21 @@ function Entries(props) {
     }
 
     const handleSubmit = () => {
-        console.log({
-            ...formState,
-            date: formatThisDate(formState.date),
-            mood_score: formState.mood_score === "" ? props.entry.mood_score : parseInt(formState.mood_score) 
-        });
-        setEditing(!editing);
-        setFormState({
-            ...formState,
-            date: new Date(),
-            sleep_start: "",
-            sleep_end: "",
-            mood_score: ""
-        });
+        if ((formState.date === "") || (formState.sleep_start === "") || (formState.sleep_end === "") || (formState.mood_score === "")) {
+            alert("PLEASE FILL IN ALL THE BOXES!")
+            setEditing(!editing);
+        } else {
+            console.log("submitted");
+            console.log(formatData());
+            setEditing(!editing);
+            setFormState({
+                ...formState,
+                date: "",
+                sleep_start: "",
+                sleep_end: "",
+                mood_score: ""
+            });
+        }
     }
 
     return (
@@ -85,8 +105,30 @@ function Entries(props) {
                         <P>Date: </P> 
                         <DatePicker name="date" selected={formState.date} onChange={dateSelected => setFormState({...formState, date: dateSelected})}/>
                     </InnerDiv>
-                    <InnerDiv> <P>Sleep Start: </P> </InnerDiv>
-                    <InnerDiv> <P>Sleep End: </P> </InnerDiv>
+                    <InnerDiv> 
+                        <P>Sleep Start: </P> 
+                        <DatePicker 
+                            selected={formState.sleep_start}
+                            onChange={time => setFormState({...formState, sleep_start: time})}
+                            showTimeSelect
+                            showTimeSelectOnly
+                            timeIntervals={60}
+                            timeCaption="Sleep Start"
+                            dateFormat="h:mm aa"
+                        />
+                    </InnerDiv>
+                    <InnerDiv> 
+                        <P>Sleep End: </P>
+                        <DatePicker 
+                            selected={formState.sleep_end}
+                            onChange={time => setFormState({...formState, sleep_end: time})}
+                            showTimeSelect
+                            showTimeSelectOnly
+                            timeIntervals={60}
+                            timeCaption="Sleep End"
+                            dateFormat="h:mm aa"
+                        />
+                    </InnerDiv>
                     <InnerDiv> <P>Total Time: </P> </InnerDiv>
                     <InnerDiv> <P>Mood Score: </P> 
                     <select name="mood_score" onChange={handleChange} value={formState.mood_score}>
