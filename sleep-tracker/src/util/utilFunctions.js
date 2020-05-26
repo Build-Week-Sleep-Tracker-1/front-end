@@ -18,3 +18,7 @@ export const formatThisHour = (militaryHour) => {
                             "10pm", "11pm"];
     return formatedHours[militaryHour];
 }
+
+export const sortArray = (arr) => {
+    return arr.sort((a,b) => a.id-b.id)
+}

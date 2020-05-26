@@ -11,14 +11,16 @@ const Nav = styled.nav`
     justify-content: space-between;
     width: 100%;
 `
-
+const P = styled.p`
+    font-weight: bold;
+`
 
 
 function Navigation(props) {
     return (
         <>
             <Nav>
-                {!props.name ? <p>Loading welcome...</p> : <p>Welcome {props.name}</p>}
+                {!props.name ? <p>Loading welcome...</p> : <P>Welcome {props.name.toUpperCase()}</P>}
                 <Link to="login">Log out</Link>
             </Nav>
         </>

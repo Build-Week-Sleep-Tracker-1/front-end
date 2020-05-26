@@ -9,6 +9,8 @@ const OuterDiv = styled.div`
     align-items: center;
     justify-content: center;
     width: 100%;
+    margin-bottom: 0;
+    padding-bottom: 0;
 ` 
 const InnerDiv = styled.div`
     display: flex;
@@ -18,9 +20,7 @@ const InnerDiv = styled.div`
     width: 100%;
 `
 const H3 = styled.h3`
-    border: 1px solid red;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
+    margin-bottom: 3%;
 `
 
 function formatData(data) {
@@ -36,14 +36,14 @@ function Graph(props) {
             {
             !props.userEntries ? <h2>Loading Graph...</h2> : 
             props.userEntries.length === 0 ? <h3>No Info To Display...</h3> : 
-            <BarChart width={1900} height={200} data={formatData(props.userEntries)}>
+            <BarChart width={1900} height={200} data={formatData(props.userEntries)} >
                 <CartesianGrid stroke="#ccc" />
-                <Bar dataKey="total_time" fill="#42bcf5"/>
-                <XAxis dataKey="date"/>
-                <YAxis />
+                <Bar dataKey="total_time" fill="#42bcf5" />
+                <XAxis dataKey="date" />
+                <YAxis label={{ value: 'Hours', angle: -90, position: 'center' }}/>
             </BarChart>
             }
-            {!props.userEntries ? null : <h3>Dates(month-day)</h3>}
+            {!props.userEntries ? null : <H3>Dates(month-day)</H3>}
         </OuterDiv>
     )
 }

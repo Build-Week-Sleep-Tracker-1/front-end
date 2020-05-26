@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { deleteEntry, getUserEntries, editEntry } from '../actions';
+import styled from 'styled-components';
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { formatThisDate, formatThisHour } from '../util/utilFunctions';
-
+import { createEntry } from '../actions';
 
 const OuterDiv = styled.div`
     background-color: white;
@@ -30,13 +28,8 @@ const InnerDiv = styled.div`
 const P = styled.p`
     font-weight: bold;
 `
-const DataP = styled.p`
-    font-weight: bold;
-    color: #42bcf5;
-`
 
-function Entries(props) {
-    const [ editing, setEditing ] = useState(false);
+function AddEntry(props) {
     const [ formState, setFormState ] = useState({
         date: "",
         sleep_start: "",
@@ -60,7 +53,7 @@ function Entries(props) {
     }
 
     const cancelChanges =() => {
-        setEditing(!editing)
+        props.setAddEntry(!props.addEntry)
         setFormState({
             ...formState,
             date: "",
@@ -68,7 +61,7 @@ function Entries(props) {
             sleep_end: "",
             mood_score: "",
         })
-    } 
+    }
 
     const handleChange = e => {
         setFormState({
@@ -77,15 +70,15 @@ function Entries(props) {
         })
     }
 
-    const handleSubmit = () => {
+
+    const handleSubmit = e => {
         if ((formState.date === "") || (formState.sleep_start === "") || (formState.sleep_end === "") || (formState.mood_score === "")) {
             alert("PLEASE FILL IN ALL THE BOXES!")
-            setEditing(!editing);
         } else {
-            console.log("submitted");
             console.log(formatData());
-            props.editEntry(props.entry.user_id, props.entry.id, formatData()); 
-            setEditing(!editing);
+            props.createEntry(props.userId, formatData());
+            console.log("created");
+            props.setAddEntry(!props.addEntry)
             setFormState({
                 ...formState,
                 date: "",
@@ -98,8 +91,6 @@ function Entries(props) {
 
     return (
         <OuterDiv>
-            {
-                editing ? 
                 <form>
                     <InnerDiv> 
                         <P>Date: </P> 
@@ -140,26 +131,17 @@ function Entries(props) {
                         <option value={2} >😐 2</option>
                         <option value={1} >🙁 1</option>
                     </select>
-                    </InnerDiv>  
+                    </InnerDiv>
+
                 </form>
-                :
-                <>
-                    <InnerDiv> <P>Date: </P> <DataP>{props.entry.date}</DataP> </InnerDiv>
-                    <InnerDiv> <P>Sleep Start: </P> <DataP>{props.entry.sleep_start}</DataP> </InnerDiv>
-                    <InnerDiv> <P>Sleep End: </P> <DataP>{props.entry.sleep_end}</DataP> </InnerDiv>
-                    <InnerDiv> <P>Total Time: </P> <DataP>{props.entry.total_time}</DataP> </InnerDiv>
-                    <InnerDiv> <P>Mood Score: </P> <DataP>{props.entry.mood_score}</DataP> </InnerDiv>
-                </>
-            }
-            { !editing ? <button onClick={() => setEditing(!editing)}>Edit</button> : 
-                <>
-                    <button onClick={() => handleSubmit()}>Save Changes</button> 
-                    <button onClick={() => cancelChanges()}>Cancel</button>
-                </>
-            }
-            <button onClick={() => props.deleteEntry(props.entry.user_id,props.entry.id)}>Delete</button>
+                <button onClick={() => handleSubmit()}>Create Entry</button> 
+                <button onClick={() => cancelChanges()}>Cancel</button>  
         </OuterDiv>
     )
 }
 
-export default connect(null,{ deleteEntry: deleteEntry, getUserEntries: getUserEntries, editEntry: editEntry })(Entries);
+export default connect((state) => {
+    return {
+        userId: state.userId
+    }
+}, { createEntry: createEntry })(AddEntry);
