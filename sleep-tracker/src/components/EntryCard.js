@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { deleteEntry, getUserEntries } from '../actions'
+import { deleteEntry, getUserEntries, editEntry } from '../actions';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { formatThisDate } from '../util/utilFunctions';
+import { formatThisDate, formatThisHour } from '../util/utilFunctions';
 
 
 const OuterDiv = styled.div`
@@ -37,11 +37,9 @@ function Entries(props) {
     const [ editing, setEditing ] = useState(false);
     const [ formState, setFormState ] = useState({
         date: "",
-        // ADD CURENT YEAR ONSUBMIT
         sleep_start: "",
         sleep_end: "",
         mood_score: "",
-        // MUST ADD TOTAL_TIME onSubmit FUNCTION 
     });
 
     const formatData = () => {
@@ -51,25 +49,13 @@ function Entries(props) {
             {
                 ...formState,
                 date: formatedDate,
-                sleep_start: formState.sleep_start.getHours(),
-                sleep_end: formState.sleep_end.getHours(),    
+                sleep_start: formatThisHour(formState.sleep_start.getHours()),
+                sleep_end: formatThisHour(formState.sleep_end.getHours()),    
                 mood_score: parseInt(formState.mood_score),
                 total_time: totalHours 
             }
         )
     }
-
-        // return (
-        //     {
-        //         ...formState,
-        //         date: formState.date === "" ? props.entry.date : formatedDate,
-        //         sleep_start: formState.sleep_start === "" ? props.entry.sleep_start : formState.sleep_start.getHours(),
-        //         sleep_end: formState.sleep_end === "" ? props.entry.sleep_end : formState.sleep_end.getHours(),    
-        //         mood_score: formState.mood_score === "" ? props.entry.mood_score : parseInt(formState.mood_score),
-        //         total_time: totalHours 
-        //     }
-        // )
-    
 
     const handleChange = e => {
         setFormState({
@@ -85,6 +71,7 @@ function Entries(props) {
         } else {
             console.log("submitted");
             console.log(formatData());
+            props.editEntry(props.entry.user_id, props.entry.id, formatData()); 
             setEditing(!editing);
             setFormState({
                 ...formState,
@@ -155,4 +142,4 @@ function Entries(props) {
     )
 }
 
-export default connect(null,{ deleteEntry: deleteEntry, getUserEntries: getUserEntries })(Entries);
+export default connect(null,{ deleteEntry: deleteEntry, getUserEntries: getUserEntries, editEntry: editEntry })(Entries);

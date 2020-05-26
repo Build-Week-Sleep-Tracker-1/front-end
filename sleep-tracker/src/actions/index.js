@@ -87,7 +87,7 @@ export const editEntry = (userId, entryId, entry) => {
         axiosWithAuth()
             .put(`/users/${userId}/entries/${entryId}`, entry)
             .then(res => {
-                dispatch({ type: "EDIT_ENTRY", payload: res })
+                dispatch({ type: "EDIT_ENTRY", payload: res.data })
             })
             .catch(err => console.log("Error from editEntry call in actions", err));
     }
