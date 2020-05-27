@@ -15,16 +15,8 @@ export const register = (newUser) => {
 
 
 // logs the user in *WORKING*
-export const login = (user) => {
-    return dispatch => {
-        axios
-            .post("https://sleep-tracker-bw4.herokuapp.com/api/auth/login", user)
-            .then(res => {
-                window.localStorage.setItem('token', res.data.token);
-                dispatch({ type: "LOGIN" , payload: res.data })
-            })
-            .catch(err => console.log("Error from get Login call in actions: ", err));
-    }
+export const login = (res) => {
+    return { type: "LOGIN" , payload: res.data }
 }
 
 // gets the array of all the users *WORKING*

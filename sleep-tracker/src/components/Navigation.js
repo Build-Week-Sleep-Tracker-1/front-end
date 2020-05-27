@@ -35,7 +35,7 @@ function Navigation(props) {
     return (
         <>
             <Nav>
-                <StyledLink to="login">Log out</StyledLink>
+                <StyledLink to="/">Log out</StyledLink>
             </Nav>
         </>
     )
