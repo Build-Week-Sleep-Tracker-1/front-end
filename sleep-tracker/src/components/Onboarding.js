@@ -2,6 +2,42 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import { connect } from 'react-redux'; // eloy: added this to hook up state and actions
 import { register } from '../actions'; // eloy: added this to hook up state and actions
+import styled from 'styled-components'; // eloy: added this for styles
+
+
+const Div = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`
+
+const OuterDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 35%;
+  width: 20%;
+  border-radius: 50px;
+  box-shadow: 0px 0px 5px 5px grey;
+`
+
+const InnerDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+`
+
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 30%;
+`
+
 
 const formSchema = yup.object().shape({
   username: yup.string().required("Must include username"),
@@ -83,47 +119,52 @@ const Onboarding = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input
-          onChange={onInputChange}
-          type="text"
-          id="name"
-          name="username"
-          value={formData.username}
-          placeholder="Username:"
-        ></input>
-        {errors.username.length > 0 ? <p>{errors.username}</p> : null}
-        <input
-          type="text"
-          id="firstname"
-          name="firstname"
-          onChange={onInputChange}
-          value={formData.firstname}
-          placeholder="First Name:"
-        ></input>
-        <input
-          onChange={onInputChange}
-          type="text"
-          id="lastname"
-          name="lastname"
-          value={formData.lastname}
-          placeholder="LastName:"
-        ></input>
-        <input
-          onChange={onInputChange}
-          type="text"
-          id="password"
-          name="password"
-          value={formData.password}
-          placeholder="Password"
-        ></input>
-        <button type="text" id="button" name="button">
-          Register
-        </button>
-      </form>
-      <button onClick={() => props.history.push('/')}>Back To Login</button>
-    </div>
+    <Div>
+      <OuterDiv>
+        <form onSubmit={onSubmit}>
+          <InnerDiv>
+            <input
+              onChange={onInputChange}
+              type="text"
+              id="name"
+              name="username"
+              value={formData.username}
+              placeholder="Username:"
+            ></input>
+            {errors.username.length > 0 ? <p>{errors.username}</p> : null}
+            <input
+              type="text"
+              id="firstname"
+              name="firstname"
+              onChange={onInputChange}
+              value={formData.firstname}
+              placeholder="First Name:"
+            ></input>
+            <input
+              onChange={onInputChange}
+              type="text"
+              id="lastname"
+              name="lastname"
+              value={formData.lastname}
+              placeholder="LastName:"
+            ></input>
+            <input
+              onChange={onInputChange}
+              type="text"
+              id="password"
+              name="password"
+              value={formData.password}
+              placeholder="Password"
+            ></input>
+            <ButtonDiv>
+              <button type="text" id="button" name="button">Register</button>
+              <button onClick={() => props.history.push('/')}>  Login</button>
+            </ButtonDiv>
+          </InnerDiv>
+        </form>
+        
+      </OuterDiv>
+    </Div>
   );
 };
 

@@ -9,7 +9,6 @@ const Div = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid red;
   height: 100vh;
 `
 
@@ -18,10 +17,10 @@ const OuterDiv = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  border: 1px solid green;
   height: 35%;
   width: 20%;
-  border-radius: 5px;
+  border-radius: 50px;
+  box-shadow: 0px 0px 5px 5px grey;
 `
 
 const InnerDiv = styled.div`
@@ -29,7 +28,6 @@ const InnerDiv = styled.div`
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  border: 1px solid blue;
 `
 
 const ButtonDiv = styled.div`
