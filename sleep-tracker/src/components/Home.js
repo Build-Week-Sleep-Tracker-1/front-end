@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { getUsers, login, getUserEntries, register, getEntry, createEntry, editEntry, deleteEntry } from '../actions';
 import Navigation from './Navigation';
 import Graph from './Graph';

@@ -41,7 +41,7 @@ function Entries(props) {
             <Div>
                 {
                 !props.userEntries ? <h3>Loading Entries...</h3> : 
-                props.userEntries.length === 0 ? <h3>No Entries To Display...</h3> :
+                props.userEntries.length === 0 ? <h3>Click here to add an entry =></h3> :
                 props.userEntries.map((item)=> {
                     return <EntryCard key={item.id} entry={item}/>
                 })}

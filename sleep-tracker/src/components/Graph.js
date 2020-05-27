@@ -55,7 +55,7 @@ function Graph(props) {
                 <YAxis label={{ value: 'Hours', angle: -90, position: 'center' }}/>
             </BarChart>
             }
-            {!props.userEntries ? null : <H3>Dates(month-day)</H3>}
+            {(!props.userEntries) || (props.userEntries.length === 0) ? null : <H3>Dates(month-day)</H3>}
         </OuterDiv>
     )
 }

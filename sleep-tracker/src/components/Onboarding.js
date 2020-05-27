@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
+import { connect } from 'react-redux'; // eloy: added this to hook up state and actions
+import { register } from '../actions'; // eloy: added this to hook up state and actions
 
 const formSchema = yup.object().shape({
   username: yup.string().required("Must include username"),
@@ -12,7 +14,7 @@ const formSchema = yup.object().shape({
     .required("Password is required"),
 });
 
-const Onboarding = () => {
+const Onboarding = (props) => {
   const [formData, setFormData] = useState({
     username: "",
     firstname: "",
@@ -62,13 +64,22 @@ const Onboarding = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setFormData({
-      username: "",
-      firstname: "",
-      lastname: "",
-      email: "",
-      password: "",
-    });
+    // eloy: connected form to back end and formated data
+    if ((formData.username === "") || (formData.firstname === "") || (formData.lastname === "") || (formData.password === "")) {
+      alert("PLEASE FILL IN ALL THE BOXES!")
+    } else {
+      props.register(
+        { username: formData.username, password: formData.password, name: `${formData.firstname.toLowerCase()} ${formData.lastname.toLowerCase()}`, age: 20 }
+      )
+      props.history.push('/')
+      setFormData({
+        username: "",
+        firstname: "",
+        lastname: "",
+        //email: "", // eloy: removed this because email is not used in backend.
+        password: "",
+      })
+    }
   };
 
   return (
@@ -102,14 +113,6 @@ const Onboarding = () => {
         <input
           onChange={onInputChange}
           type="text"
-          id="email"
-          name="email"
-          value={formData.email}
-          placeholder="Email:"
-        ></input>
-        <input
-          onChange={onInputChange}
-          type="text"
           id="password"
           name="password"
           value={formData.password}
@@ -119,8 +122,9 @@ const Onboarding = () => {
           Register
         </button>
       </form>
+      <button onClick={() => props.history.push('/')}>Back To Login</button>
     </div>
   );
 };
 
-export default Onboarding;
+export default connect(null, { register: register })(Onboarding);
