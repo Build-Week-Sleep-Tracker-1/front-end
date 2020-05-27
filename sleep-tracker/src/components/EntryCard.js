@@ -147,7 +147,7 @@ function Entries(props) {
                     <InnerDiv> <P>Date: </P> <DataP>{props.entry.date}</DataP> </InnerDiv>
                     <InnerDiv> <P>Sleep Start: </P> <DataP>{props.entry.sleep_start}</DataP> </InnerDiv>
                     <InnerDiv> <P>Sleep End: </P> <DataP>{props.entry.sleep_end}</DataP> </InnerDiv>
-                    <InnerDiv> <P>Total Time: </P> <DataP>{props.entry.total_time}</DataP> </InnerDiv>
+                    <InnerDiv> <P>Total Time Slept: </P> <DataP>{props.entry.total_time}</DataP> </InnerDiv>
                     <InnerDiv> <P>Mood Score: </P> <DataP>{props.entry.mood_score}</DataP> </InnerDiv>
                 </>
             }

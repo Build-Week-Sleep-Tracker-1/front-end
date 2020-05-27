@@ -8,11 +8,26 @@ const Nav = styled.nav`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: end;
     width: 100%;
+    padding: 0;
+    height: 5vh;
 `
-const P = styled.p`
+
+const StyledLink = styled(Link)`
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    width: 5%;
+    height: 90%;
+    text-decoration: none;
+    background-color: white;
+    &:hover {
+        background-color: #42bcf5;
+        color: white;
+    }
 `
 
 
@@ -20,8 +35,7 @@ function Navigation(props) {
     return (
         <>
             <Nav>
-                {!props.name ? <p>Loading welcome...</p> : <P>Welcome {props.name.toUpperCase()}</P>}
-                <Link to="login">Log out</Link>
+                <StyledLink to="login">Log out</StyledLink>
             </Nav>
         </>
     )

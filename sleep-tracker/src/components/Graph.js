@@ -12,15 +12,19 @@ const OuterDiv = styled.div`
     margin-bottom: 0;
     padding-bottom: 0;
 ` 
-const InnerDiv = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-`
 const H3 = styled.h3`
     margin-bottom: 3%;
+`
+const P = styled.h1`
+    font-weight: bold;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    width: 20%;
+    height: 100%;   
+    background-color: white;
 `
 
 function formatData(data) {
@@ -32,7 +36,15 @@ function formatData(data) {
 
 function Graph(props) {
     return (
-        <OuterDiv>  
+        <OuterDiv>
+            {!props.name ? <p>Loading welcome...</p> : 
+                <P>{props.name.toLowerCase()
+                                .split(' ')
+                                .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+                                .join(' ')
+                }
+                </P>
+            }  
             {
             !props.userEntries ? <h2>Loading Graph...</h2> : 
             props.userEntries.length === 0 ? <h3>No Info To Display...</h3> : 
@@ -50,6 +62,7 @@ function Graph(props) {
 
 export default connect((state) => {
     return {
+        name: state.name,
         userEntries: state.userEntries
     }
 })(Graph);
