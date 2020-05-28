@@ -11,7 +11,7 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #9e9e9e;
+  background-color: #79bcc4;
 `
 
 const OuterDiv = styled.div`
@@ -22,9 +22,9 @@ const OuterDiv = styled.div`
   height: 35%;
   width: 20%;
   border-radius: 50px;
-  background: #9e9e9e;
-  box-shadow:  27px 27px 55px #868686, 
-               -27px -27px 55px #b6b6b6;
+  background: #79bcc4;
+  box-shadow:  27px 27px 54px #67a0a7, 
+               -27px -27px 54px #8bd8e1;
 `
 
 const InnerDiv = styled.div`
@@ -43,24 +43,34 @@ const ButtonDiv = styled.div`
 `
 
 const Button = styled.div`
+  cursor:pointer;
   font-size: 1rem;
   font-weight: bold;
-  color: #424242;
+  color: #486775;
   padding: 5%;
   border-radius: 5px;
-  background: linear-gradient(145deg, #a9a9a9, #8e8e8e);
-  box-shadow:  4px 4px 8px #868686, 
-               -4px -4px 8px #b6b6b6;
+  background: linear-gradient(145deg, #81c9d2, #6da9b0);
+  box-shadow:  4px 4px 9px #67a0a7, 
+               -4px -4px 9px #8bd8e1;
   &:hover {
       background: white;
   }
 `
 
 const H1 = styled.h1`
-  color: #424242;
+  color: #486775;
   margin-bottom: 5%;
 `
 
+const Input = styled.input`
+  margin-bottom: 5%;
+  padding: 5%;
+  border-style: none;
+  border-radius: 3px;
+  background: #79bcc4;
+  box-shadow: inset 4px 4px 7px #67a0a7, 
+              inset -4px -4px 7px #8bd8e1;
+`
 
 const formSchema = yup.object().shape({
   username: yup.string().required("Must include username"),
@@ -147,39 +157,39 @@ const Onboarding = (props) => {
       <OuterDiv>
         <form >
           <InnerDiv>
-            <input
+            <Input
               onChange={onInputChange}
               type="text"
               id="name"
               name="username"
               value={formData.username}
-              placeholder="Username:"
-            ></input>
+              placeholder="Username"
+            ></Input>
             {errors.username.length > 0 ? <p>{errors.username}</p> : null}
-            <input
+            <Input
               type="text"
               id="firstname"
               name="firstname"
               onChange={onInputChange}
               value={formData.firstname}
-              placeholder="First Name:"
-            ></input>
-            <input
+              placeholder="First Name"
+            ></Input>
+            <Input
               onChange={onInputChange}
               type="text"
               id="lastname"
               name="lastname"
               value={formData.lastname}
-              placeholder="LastName:"
-            ></input>
-            <input
+              placeholder="Last Name"
+            ></Input>
+            <Input
               onChange={onInputChange}
-              type="text"
+              type="password" // changed this to password to hide password input
               id="password"
               name="password"
               value={formData.password}
               placeholder="Password"
-            ></input>
+            ></Input> 
             <ButtonDiv>
               <Button type="text" id="button" name="button" onClick={onSubmit}>Register</Button>
               <Button onClick={() => props.history.push('/')}>  Login</Button>

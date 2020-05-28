@@ -6,12 +6,19 @@ import Graph from './Graph';
 import RecommendedSleep from './RecommendedSleep';
 import Entries from './Entries';
 import axios from 'axios';
+import styled from 'styled-components';
 
 /*
     username: johndoe1
     password: "123"
     DO NOT DELETE THIS
 */
+
+const Div = styled.div`
+    border: 1px solid #79bcc4;
+    background-color: #79bcc4;
+    height: 100%;
+`
 
 function Home(props) {
 
@@ -29,10 +36,10 @@ function Home(props) {
     }
 
     return (
-        <>
+        <Div>
             <Navigation/>
             {/* <button onClick={props.getUsers}>getUsers</button> */}
-            <button onClick={() => sendToLog({ username: "johndoe1", password: "123" })}>Login</button>
+            {/* <button onClick={() => sendToLog({ username: "johndoe1", password: "123" })}>Login</button> */}
             {/* <button onClick={() => props.register({ username: "guyperson", password: "123", name: "guy person", age: 20 })}>Register</button> */}
             {/* <button onClick={() => props.getUserEntries(1)}>getUserEntries</button> */}
             {/* <button onClick={() => props.getEntry(1, 1)}>getEntry</button> */}
@@ -42,7 +49,7 @@ function Home(props) {
             <Graph/>
             <Entries/>
             <RecommendedSleep/>
-        </>
+        </Div>
     )
 }
 

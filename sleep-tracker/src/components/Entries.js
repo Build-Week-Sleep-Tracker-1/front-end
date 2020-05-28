@@ -5,6 +5,7 @@ import AddEntry from './AddEntry';
 import styled from 'styled-components';
 
 const Div = styled.div`
+    background: #79bcc4;
     padding-top: .5%;
     display: flex;
     justify-content: center;
@@ -20,13 +21,15 @@ const ButtonDiv = styled.div`
 `
 
 const AddButton = styled.button`
+    cursor:pointer;
+    border-style: none;
     height: 96%;
     font-size: 3rem;
-    color: #111d57;
+    color: #486775;
     border-radius: 10px;
-    background: linear-gradient(145deg, #5bc6ff, #4da7db);
-    box-shadow:  3px 3px 6px #489dcf, 
-                 -3px -3px 6px #62d5ff;
+    background: linear-gradient(145deg, #81c9d2, #6da9b0);
+    box-shadow:  6px 6px 11px #67a0a7, 
+                 -6px -6px 11px #8bd8e1;
     &:hover {
         background: white;
     }

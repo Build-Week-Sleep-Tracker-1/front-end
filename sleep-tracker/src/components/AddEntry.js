@@ -6,15 +6,16 @@ import { formatThisDate, formatThisHour } from '../util/utilFunctions';
 import { createEntry } from '../actions';
 
 const OuterDiv = styled.div`
-    background-color: white;
-    border: 2px solid grey;
-    border-radius: 5px;
-    margin: .3%;
+    margin: .5%;
     padding: .5%;
     display: flex;
     flex-direction: column;
     width: 13%;
     transition: transform .2s;
+    border-radius: 10px;
+    background: #79bcc4;
+    box-shadow:  6px 6px 11px #67a0a7, 
+                 -6px -6px 11px #8bd8e1;
     &:hover {
         transform: scale(1.07);
       } 
@@ -27,7 +28,52 @@ const InnerDiv = styled.div`
 `
 const P = styled.p`
     font-weight: bold;
+    color: #486775;
 `
+
+const Button = styled.div`
+    cursor:pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #486775;
+    padding: 3%;
+    margin: 2%;
+    border-radius: 5px;
+    background: linear-gradient(145deg, #81c9d2, #6da9b0);
+    box-shadow:  4px 4px 9px #67a0a7, 
+                -4px -4px 9px #8bd8e1;
+    &:hover {
+        background: white;
+    }
+`
+
+const DateDiv = styled.div`
+`
+
+const Input = styled(DatePicker)`
+    color: #486775;
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-style: none;
+    border-radius: 3px;
+    background: #79bcc4;
+    box-shadow: inset 4px 4px 7px #67a0a7, 
+                inset -4px -4px 7px #8bd8e1;
+`
+
+const Select = styled.select`
+    color: #486775;
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border-style: none;
+    border-radius: 3px;
+    background: #79bcc4;
+    box-shadow: inset 4px 4px 7px #67a0a7, 
+                inset -4px -4px 7px #8bd8e1;
+`
+
 
 function AddEntry(props) {
     const [ formState, setFormState ] = useState({
@@ -93,49 +139,55 @@ function AddEntry(props) {
         <OuterDiv>
                 <form>
                     <InnerDiv> 
-                        <P>Date: </P> 
-                        <DatePicker name="date" selected={formState.date} onChange={dateSelected => setFormState({...formState, date: dateSelected})} placeholderText="Day Sleep Started"/>
+                        <P>Date: </P>
+                        <DateDiv> 
+                            <Input name="date" selected={formState.date} onChange={dateSelected => setFormState({...formState, date: dateSelected})} placeholderText="Day Sleep Started"/>
+                        </DateDiv>
                     </InnerDiv>
                     <InnerDiv> 
-                        <P>Sleep Start: </P> 
-                        <DatePicker 
-                            selected={formState.sleep_start}
-                            onChange={time => setFormState({...formState, sleep_start: time})}
-                            showTimeSelect
-                            showTimeSelectOnly
-                            timeIntervals={60}
-                            timeCaption="Sleep Start"
-                            dateFormat="h:mm aa"
-                            placeholderText="Time Sleep Started"
-                        />
+                        <P>Sleep Start: </P>
+                        <DateDiv> 
+                            <Input 
+                                selected={formState.sleep_start}
+                                onChange={time => setFormState({...formState, sleep_start: time})}
+                                showTimeSelect
+                                showTimeSelectOnly
+                                timeIntervals={60}
+                                timeCaption="Sleep Start"
+                                dateFormat="h:mm aa"
+                                placeholderText="Time Sleep Started"
+                            />
+                        </DateDiv>
                     </InnerDiv>
                     <InnerDiv> 
                         <P>Sleep End: </P>
-                        <DatePicker 
-                            selected={formState.sleep_end}
-                            onChange={time => setFormState({...formState, sleep_end: time})}
-                            showTimeSelect
-                            showTimeSelectOnly
-                            timeIntervals={60}
-                            timeCaption="Sleep End"
-                            dateFormat="h:mm aa"
-                            placeholderText="Time Sleep Ended"
-                        />
+                        <DateDiv>
+                            <Input 
+                                selected={formState.sleep_end}
+                                onChange={time => setFormState({...formState, sleep_end: time})}
+                                showTimeSelect
+                                showTimeSelectOnly
+                                timeIntervals={60}
+                                timeCaption="Sleep End"
+                                dateFormat="h:mm aa"
+                                placeholderText="Time Sleep Ended"
+                            />
+                        </DateDiv>
                     </InnerDiv>
                     <InnerDiv> 
                         <P>Mood Score: </P> 
-                    <select name="mood_score" onChange={handleChange} value={formState.mood_score}>
+                    <Select name="mood_score" onChange={handleChange} value={formState.mood_score}>
                         <option></option>
                         <option value={4} >😃 4</option>
                         <option value={3} >🙂 3</option>
                         <option value={2} >😐 2</option>
                         <option value={1} >🙁 1</option>
-                    </select>
+                    </Select>
                     </InnerDiv>
 
                 </form>
-                <button onClick={() => handleSubmit()}>Create Entry</button> 
-                <button onClick={() => cancelChanges()}>Cancel</button>  
+                <Button onClick={() => handleSubmit()}>Create Entry</Button> 
+                <Button onClick={() => cancelChanges()}>Cancel</Button>  
         </OuterDiv>
     )
 }

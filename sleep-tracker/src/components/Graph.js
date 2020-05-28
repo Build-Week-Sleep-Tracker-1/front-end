@@ -14,7 +14,7 @@ const OuterDiv = styled.div`
 ` 
 const H3 = styled.h3`
     margin-bottom: 3%;
-    color: #111d57;
+    color: #486775;
 `
 const P = styled.h1`
     font-weight: bold;
@@ -22,10 +22,9 @@ const P = styled.h1`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #111d57;
+    color: #486775;
     width: 20%;
-    height: 100%;   
-    background-color: white;
+    height: 100%;
 `
 
 function formatData(data) {
@@ -50,10 +49,10 @@ function Graph(props) {
             !props.userEntries ? <h2>Loading Graph...</h2> : 
             props.userEntries.length === 0 ? <h3>No Info To Display...</h3> : 
             <BarChart width={1900} height={200} data={formatData(props.userEntries)} >
-                <CartesianGrid stroke="#ccc" />
-                <Bar dataKey="total_time" fill="#55b9f3" />
-                <XAxis dataKey="date" />
-                <YAxis label={{ value: 'Hours', angle: -90, position: 'center' }}/>
+                <CartesianGrid stroke="#486775" />
+                <Bar dataKey="total_time" fill="#486775" />
+                <XAxis dataKey="date" stroke="#486775"/>
+                <YAxis label={{ value: 'Hours', angle: -90, position: 'center' }} stroke="#486775"/>
             </BarChart>
             }
             {(!props.userEntries) || (props.userEntries.length === 0) ? null : <H3>Dates(month-day)</H3>}
