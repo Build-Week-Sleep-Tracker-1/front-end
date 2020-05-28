@@ -5,7 +5,6 @@ import Navigation from './Navigation';
 import Graph from './Graph';
 import RecommendedSleep from './RecommendedSleep';
 import Entries from './Entries';
-import axios from 'axios';
 import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
 
