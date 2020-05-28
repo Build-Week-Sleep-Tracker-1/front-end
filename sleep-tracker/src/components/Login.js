@@ -181,10 +181,11 @@ const Login = (props) => {
             props.history.push('/Home');
         })
         .catch(err => {
+          setLoading(false);
           console.log("Error from get Login call in Login: ", err)
           setInValidLogin(true);
         });
-        
+
     setformData({ email: "", password: "" });
   };
 
