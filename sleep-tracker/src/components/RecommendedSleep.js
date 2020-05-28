@@ -22,6 +22,10 @@ const P = styled.p`
 
 const noHappyEntires = "You don’t have any entries with a mood score of 4(the happiest mood).\n Please increase the amount of hours that you sleep so that you can wake up with a happy mood.\n We will recommend the lowest amount of hours that you need to sleep to achieve this mood."
 
+const LoadingH3 = styled.h3`
+    color: #486775;
+`
+
 function RecommendedSleep(props) {
 
     const recommendedAmount = (entries) => {
@@ -45,7 +49,7 @@ function RecommendedSleep(props) {
             {
                 !props.userEntries ? 
                 
-                <h4>Loading recommended amount of sleep...</h4> 
+                <LoadingH3>Loading recommended amount of sleep...</LoadingH3> 
                 
                 : 
 

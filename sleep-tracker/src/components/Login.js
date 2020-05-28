@@ -72,6 +72,41 @@ const Input = styled.input`
               inset -4px -4px 7px #8bd8e1;
 `
 
+const Loader = styled.div`
+  border: 5px solid #79bcc4;
+  border-radius: 50%;
+  border-top: 5px solid #486775;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+  }
+
+  /* Safari */
+  @-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`
+
+const P = styled.p`
+  color: #486775;
+  font-style: italic;
+`
+
+const LoaderDiv = styled.div`
+  margin-top: 7%;
+  width: 25%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`
+
 const formSchema = yup.object().shape({
   email: yup
     .string()
@@ -84,6 +119,8 @@ const formSchema = yup.object().shape({
 });
 
 const Login = (props) => {
+  const [ loading, setLoading ] = useState(false);
+
   const [ inValidLogin, setInValidLogin ] = useState(false);
 
   const [formData, setformData] = useState({
@@ -133,7 +170,8 @@ const Login = (props) => {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log("login form data",formData); // eloy: added this to check what data is being submitted
-     
+    setLoading(true);
+
     axios
         .post("https://sleep-tracker-bw4.herokuapp.com/api/auth/login", { username: formData.email, password: formData.password }) // eloy: data submitted to backend
         .then(res => {
@@ -146,7 +184,7 @@ const Login = (props) => {
           console.log("Error from get Login call in Login: ", err)
           setInValidLogin(true);
         });
-    
+        
     setformData({ email: "", password: "" });
   };
 
@@ -182,6 +220,7 @@ const Login = (props) => {
         {errors.password.length > 6 ? <p style={{color: "red"}}>{errors.password}</p> : null} {/* eloy: styled errors */}
         {errors.email.length > 0 ? <p style={{color: "red"}}>{errors.email}</p> : null} {/* eloy: styled errors */}
         {inValidLogin === true ? <p style={{color: "red"}}>invalid username or password</p> : null} {/* eloy: added this incase login is invalid */}
+        {loading === true ? <LoaderDiv><P>Loading </P> <Loader/></LoaderDiv> : null}
       </OuterDiv>
     </Div>
   );

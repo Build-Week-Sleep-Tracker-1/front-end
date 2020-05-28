@@ -36,6 +36,7 @@ function Home(props) {
     }
 
     return (
+        
         <Div>
             <Navigation/>
             {/* <button onClick={props.getUsers}>getUsers</button> */}
@@ -49,7 +50,8 @@ function Home(props) {
             <Graph/>
             <Entries/>
             <RecommendedSleep/>
-        </Div>
+        </Div>  
+        
     )
 }
 

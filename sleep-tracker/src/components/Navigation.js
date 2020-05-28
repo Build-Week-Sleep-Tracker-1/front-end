@@ -15,6 +15,7 @@ const Nav = styled.nav`
 `
 
 const StyledLink = styled(Link)`
+    border-style: none;
     margin-right: 1%;
     font-weight: bold;
     display: flex;

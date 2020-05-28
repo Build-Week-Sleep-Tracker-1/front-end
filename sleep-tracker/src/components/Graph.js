@@ -27,6 +27,16 @@ const P = styled.h1`
     height: 100%;
 `
 
+const NoInfo = styled.h3`
+    color: #486775;
+    margin-top: 5%;
+    margin-bottom: 5%;
+`
+
+const LoadingP = styled.p`
+    color: #486775;
+`
+
 function formatData(data) {
     return (data.map((item) => {
         return {...item, date: item.date.substring(0, item.date.length - 5)}
@@ -37,7 +47,7 @@ function formatData(data) {
 function Graph(props) {
     return (
         <OuterDiv>
-            {!props.name ? <p>Loading welcome...</p> : 
+            {!props.name ? <LoadingP>Loading welcome...</LoadingP> : 
                 <P>{props.name.toLowerCase()
                                 .split(' ')
                                 .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
@@ -46,8 +56,8 @@ function Graph(props) {
                 </P>
             }  
             {
-            !props.userEntries ? <h2>Loading Graph...</h2> : 
-            props.userEntries.length === 0 ? <h3>No Info To Display...</h3> : 
+            !props.userEntries ? <NoInfo>Loading Graph...</NoInfo> : 
+            props.userEntries.length === 0 ? <NoInfo>No Info To Display...</NoInfo> : 
             <BarChart width={1900} height={200} data={formatData(props.userEntries)} >
                 <CartesianGrid stroke="#486775" />
                 <Bar dataKey="total_time" fill="#486775" />

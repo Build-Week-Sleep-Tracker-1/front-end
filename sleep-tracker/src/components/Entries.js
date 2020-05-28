@@ -35,6 +35,12 @@ const AddButton = styled.button`
     }
 `
 
+const NoInfo = styled.h3`
+    color: #486775;
+    margin-top: 10%;
+    margin-bottom: 10%;
+`
+
 function Entries(props) {
     const [ addEntry, setAddEntry ] = useState(false);
 
@@ -42,8 +48,8 @@ function Entries(props) {
         <>
             <Div>
                 {
-                !props.userEntries ? <h3>Loading Entries...</h3> : 
-                props.userEntries.length === 0 ? <h3>Click here to add an entry =></h3> :
+                !props.userEntries ? <NoInfo>Loading Entries...</NoInfo> : 
+                props.userEntries.length === 0 ? <NoInfo>Click here to add an entry =></NoInfo> :
                 props.userEntries.map((item)=> {
                     return <EntryCard key={item.id} entry={item}/>
                 })}
