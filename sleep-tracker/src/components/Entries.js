@@ -6,14 +6,12 @@ import styled from 'styled-components';
 
 const Div = styled.div`
     padding-top: .5%;
-    border-top: 5px solid grey;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    border-bottom: 5px solid grey;
     padding-bottom: .5%;
-    background-color: #ccc;
 `
+
 const ButtonDiv = styled.div`
     margin-left: .5%;
     display: flex;
@@ -23,13 +21,14 @@ const ButtonDiv = styled.div`
 
 const AddButton = styled.button`
     height: 96%;
-    border-radius: 5px; 
     font-size: 3rem;
-    border: 2px solid #42bcf5;
-    color: #42bcf5;
+    color: #111d57;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #5bc6ff, #4da7db);
+    box-shadow:  3px 3px 6px #489dcf, 
+                 -3px -3px 6px #62d5ff;
     &:hover {
-        background-color: #42bcf5;
-        color: white;
+        background: white;
     }
 `
 

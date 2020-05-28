@@ -7,9 +7,11 @@ import styled from 'styled-components'; // eloy: added this for styles
 
 const Div = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #9e9e9e;
 `
 
 const OuterDiv = styled.div`
@@ -20,9 +22,9 @@ const OuterDiv = styled.div`
   height: 35%;
   width: 20%;
   border-radius: 50px;
-  background: #ffffff;
-  box-shadow:  20px 20px 60px #d9d9d9, 
-               -20px -20px 60px #ffffff;
+  background: #9e9e9e;
+  box-shadow:  27px 27px 55px #868686, 
+               -27px -27px 55px #b6b6b6;
 `
 
 const InnerDiv = styled.div`
@@ -38,6 +40,25 @@ const ButtonDiv = styled.div`
   align-items: center;
   width: 100%;
   margin-top: 30%;
+`
+
+const Button = styled.div`
+  font-size: 1rem;
+  font-weight: bold;
+  color: #424242;
+  padding: 5%;
+  border-radius: 5px;
+  background: linear-gradient(145deg, #a9a9a9, #8e8e8e);
+  box-shadow:  4px 4px 8px #868686, 
+               -4px -4px 8px #b6b6b6;
+  &:hover {
+      background: white;
+  }
+`
+
+const H1 = styled.h1`
+  color: #424242;
+  margin-bottom: 5%;
 `
 
 
@@ -122,8 +143,9 @@ const Onboarding = (props) => {
 
   return (
     <Div>
+      <H1>Sleep Tracker Sign Up Page</H1>
       <OuterDiv>
-        <form onSubmit={onSubmit}>
+        <form >
           <InnerDiv>
             <input
               onChange={onInputChange}
@@ -159,8 +181,8 @@ const Onboarding = (props) => {
               placeholder="Password"
             ></input>
             <ButtonDiv>
-              <button type="text" id="button" name="button">Register</button>
-              <button onClick={() => props.history.push('/')}>  Login</button>
+              <Button type="text" id="button" name="button" onClick={onSubmit}>Register</Button>
+              <Button onClick={() => props.history.push('/')}>  Login</Button>
             </ButtonDiv>
           </InnerDiv>
         </form>

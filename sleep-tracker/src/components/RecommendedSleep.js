@@ -7,12 +7,13 @@ const Div = styled.div`
 `
 const H2 = styled.h2`
     margin-bottom: 0;
+    color: #111d57;
 `
 const H4 = styled.h4`
     margin: 0;
     padding: 0;
     font-size: 3rem;
-    color: #42bcf5;
+    color: #55b9f3;
 `
 const P = styled.p`
     font-style: italic;
@@ -47,7 +48,7 @@ function RecommendedSleep(props) {
                 
                 : 
 
-                props.userEntries.length < 30 ? // should be < 30
+                props.userEntries.length > 30 ? // should be < 30
 
                 <P>(You currently have {props.userEntries.length} {props.userEntries.length === 1 ? "entry" : "entries"}. 
                 Once you have entered 30 or more entries we will 

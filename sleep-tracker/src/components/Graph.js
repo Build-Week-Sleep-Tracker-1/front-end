@@ -14,6 +14,7 @@ const OuterDiv = styled.div`
 ` 
 const H3 = styled.h3`
     margin-bottom: 3%;
+    color: #111d57;
 `
 const P = styled.h1`
     font-weight: bold;
@@ -21,7 +22,7 @@ const P = styled.h1`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: black;
+    color: #111d57;
     width: 20%;
     height: 100%;   
     background-color: white;
@@ -50,7 +51,7 @@ function Graph(props) {
             props.userEntries.length === 0 ? <h3>No Info To Display...</h3> : 
             <BarChart width={1900} height={200} data={formatData(props.userEntries)} >
                 <CartesianGrid stroke="#ccc" />
-                <Bar dataKey="total_time" fill="#42bcf5" />
+                <Bar dataKey="total_time" fill="#55b9f3" />
                 <XAxis dataKey="date" />
                 <YAxis label={{ value: 'Hours', angle: -90, position: 'center' }}/>
             </BarChart>

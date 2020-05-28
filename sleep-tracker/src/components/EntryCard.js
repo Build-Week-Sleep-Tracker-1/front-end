@@ -8,16 +8,16 @@ import { formatThisDate, formatThisHour } from '../util/utilFunctions';
 
 
 const OuterDiv = styled.div`
-    background-color: white;
-    border: 2px solid grey;
-    border-radius: 5px;
-
     margin: .3%;
     padding: .5%;
     display: flex;
     flex-direction: column;
     width: 13%;
     transition: transform .2s;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #5bc6ff, #4da7db);
+    box-shadow:  3px 3px 7px #489dcf, 
+                 -3px -3px 7px #62d5ff;
     &:hover {
         transform: scale(1.07);
       } 
@@ -30,10 +30,15 @@ const InnerDiv = styled.div`
 `
 const P = styled.p`
     font-weight: bold;
+    color: #111d57;
 `
 const DataP = styled.p`
     font-weight: bold;
-    color: #55b9f3;
+    color: #111d57;
+`
+
+const Button = styled.button`
+
 `
 
 function Entries(props) {
@@ -149,7 +154,16 @@ function Entries(props) {
                     <InnerDiv> <P>Sleep Start: </P> <DataP>{props.entry.sleep_start}</DataP> </InnerDiv>
                     <InnerDiv> <P>Sleep End: </P> <DataP>{props.entry.sleep_end}</DataP> </InnerDiv>
                     <InnerDiv> <P>Total Time Slept: </P> <DataP>{props.entry.total_time}</DataP> </InnerDiv>
-                    <InnerDiv> <P>Mood Score: </P> <DataP>{props.entry.mood_score}</DataP> </InnerDiv>
+                    <InnerDiv> <P>Mood Score: </P> <DataP>{props.entry.mood_score === 1 ? <span>🙁</span> 
+                                                            : 
+                                                            props.entry.mood_score === 2 ? <span>😐</span>
+                                                            :
+                                                            props.entry.mood_score === 3 ? <span>🙂</span>
+                                                            :
+                                                            props.entry.mood_score === 4 ? <span>😃</span>
+                                                            :
+                                                            null}
+                    </DataP> </InnerDiv>
                 </>
             }
             { !editing ? <button onClick={() => setEditing(!editing)}>Edit</button> : 
