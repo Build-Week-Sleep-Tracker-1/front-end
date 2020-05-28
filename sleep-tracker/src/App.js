@@ -4,7 +4,7 @@ import Home from './components/Home';
 import Onboarding from './components/Onboarding';
 import Login from './components/Login';
 import PrivateRoute from './util/PrivateRoute';
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 function App() {
   return (

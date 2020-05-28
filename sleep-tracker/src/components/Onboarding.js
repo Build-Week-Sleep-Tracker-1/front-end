@@ -20,7 +20,9 @@ const OuterDiv = styled.div`
   height: 35%;
   width: 20%;
   border-radius: 50px;
-  box-shadow: 0px 0px 5px 5px grey;
+  background: #ffffff;
+  box-shadow:  20px 20px 60px #d9d9d9, 
+               -20px -20px 60px #ffffff;
 `
 
 const InnerDiv = styled.div`

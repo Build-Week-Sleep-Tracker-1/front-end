@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Nav = styled.nav`
-    background-color: #42bcf5;
+    background-color: #55b9f3;
     display: flex;
     flex-direction: row;
     align-items: center;

@@ -11,6 +11,7 @@ const OuterDiv = styled.div`
     background-color: white;
     border: 2px solid grey;
     border-radius: 5px;
+
     margin: .3%;
     padding: .5%;
     display: flex;
@@ -32,7 +33,7 @@ const P = styled.p`
 `
 const DataP = styled.p`
     font-weight: bold;
-    color: #42bcf5;
+    color: #55b9f3;
 `
 
 function Entries(props) {
