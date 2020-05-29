@@ -1,3 +1,5 @@
+import { sortArray } from '../util/utilFunctions';
+
 const initialState = {
     name: null,
     age: null,
@@ -14,7 +16,7 @@ export const reducer = (state = initialState, action) => {
             return { ...state }
         case "LOGIN":
             console.log("LOGIN called from reducer", action.payload)
-            return { ...state, name: action.payload.name, age: action.payload.age, userId: action.payload.userId, userEntries: action.payload.entries }
+            return { ...state, name: action.payload.name, age: action.payload.age, userId: action.payload.userId, userEntries: sortArray(action.payload.entries) }
         case "GET_USERS":
             console.log("GET_USERS called from reducer", action.payload)
             return { ...state }
@@ -29,7 +31,8 @@ export const reducer = (state = initialState, action) => {
             return { ...state, userEntries: [ ...state.userEntries, action.payload ] }
         case "EDIT_ENTRY":
             console.log("EDIT_ENTRY called from reducer", action.payload)
-            return { ...state}
+            const newArr = [ ...state.userEntries.filter(item => item.id !== action.payload.id), action.payload ]
+            return { ...state, userEntries: sortArray(newArr)}
         case "DELETE_ENTRY":
             console.log("DELETE_ENTRY called from reducer", action.payload)
             return { ...state, userEntries: state.userEntries.filter(item => item.id !== action.payload)}

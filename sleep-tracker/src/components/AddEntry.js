@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { deleteEntry, getUserEntries, editEntry } from '../actions';
+import styled from 'styled-components';
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { formatThisDate, formatThisHour } from '../util/utilFunctions';
-
+import { createEntry } from '../actions';
 
 const OuterDiv = styled.div`
     margin: .5%;
@@ -29,10 +27,6 @@ const InnerDiv = styled.div`
     justify-content: space-between; 
 `
 const P = styled.p`
-    font-weight: bold;
-    color: #486775;
-`
-const DataP = styled.p`
     font-weight: bold;
     color: #486775;
 `
@@ -80,8 +74,8 @@ const Select = styled.select`
                 inset -4px -4px 7px #8bd8e1;
 `
 
-function Entries(props) {
-    const [ editing, setEditing ] = useState(false);
+
+function AddEntry(props) {
     const [ formState, setFormState ] = useState({
         date: "",
         sleep_start: "",
@@ -105,7 +99,7 @@ function Entries(props) {
     }
 
     const cancelChanges =() => {
-        setEditing(!editing)
+        props.setAddEntry(!props.addEntry)
         setFormState({
             ...formState,
             date: "",
@@ -113,7 +107,7 @@ function Entries(props) {
             sleep_end: "",
             mood_score: "",
         })
-    } 
+    }
 
     const handleChange = e => {
         setFormState({
@@ -122,15 +116,15 @@ function Entries(props) {
         })
     }
 
-    const handleSubmit = () => {
+
+    const handleSubmit = e => {
         if ((formState.date === "") || (formState.sleep_start === "") || (formState.sleep_end === "") || (formState.mood_score === "")) {
             alert("PLEASE FILL IN ALL THE BOXES!")
-            setEditing(!editing);
         } else {
-            console.log("submitted");
             console.log(formatData());
-            props.editEntry(props.entry.user_id, props.entry.id, formatData()); 
-            setEditing(!editing);
+            props.createEntry(props.userId, formatData());
+            console.log("created");
+            props.setAddEntry(!props.addEntry)
             setFormState({
                 ...formState,
                 date: "",
@@ -143,8 +137,6 @@ function Entries(props) {
 
     return (
         <OuterDiv>
-            {
-                editing ? 
                 <form>
                     <InnerDiv> 
                         <P>Date: </P>
@@ -155,31 +147,31 @@ function Entries(props) {
                     <InnerDiv> 
                         <P>Sleep Start: </P>
                         <DateDiv> 
-                        <Input 
-                            selected={formState.sleep_start}
-                            onChange={time => setFormState({...formState, sleep_start: time})}
-                            showTimeSelect
-                            showTimeSelectOnly
-                            timeIntervals={60}
-                            timeCaption="Sleep Start"
-                            dateFormat="h:mm aa"
-                            placeholderText="Time Sleep Started"
-                        />
+                            <Input 
+                                selected={formState.sleep_start}
+                                onChange={time => setFormState({...formState, sleep_start: time})}
+                                showTimeSelect
+                                showTimeSelectOnly
+                                timeIntervals={60}
+                                timeCaption="Sleep Start"
+                                dateFormat="h:mm aa"
+                                placeholderText="Time Sleep Started"
+                            />
                         </DateDiv>
                     </InnerDiv>
                     <InnerDiv> 
                         <P>Sleep End: </P>
                         <DateDiv>
-                        <Input 
-                            selected={formState.sleep_end}
-                            onChange={time => setFormState({...formState, sleep_end: time})}
-                            showTimeSelect
-                            showTimeSelectOnly
-                            timeIntervals={60}
-                            timeCaption="Sleep End"
-                            dateFormat="h:mm aa"
-                            placeholderText="Time Sleep Ended"
-                        />
+                            <Input 
+                                selected={formState.sleep_end}
+                                onChange={time => setFormState({...formState, sleep_end: time})}
+                                showTimeSelect
+                                showTimeSelectOnly
+                                timeIntervals={60}
+                                timeCaption="Sleep End"
+                                dateFormat="h:mm aa"
+                                placeholderText="Time Sleep Ended"
+                            />
                         </DateDiv>
                     </InnerDiv>
                     <InnerDiv> 
@@ -191,35 +183,17 @@ function Entries(props) {
                         <option value={2} >😐 2</option>
                         <option value={1} >🙁 1</option>
                     </Select>
-                    </InnerDiv>  
+                    </InnerDiv>
+
                 </form>
-                :
-                <>
-                    <InnerDiv> <P>Date: </P> <DataP>{props.entry.date}</DataP> </InnerDiv>
-                    <InnerDiv> <P>Sleep Start: </P> <DataP>{props.entry.sleep_start}</DataP> </InnerDiv>
-                    <InnerDiv> <P>Sleep End: </P> <DataP>{props.entry.sleep_end}</DataP> </InnerDiv>
-                    <InnerDiv> <P>Total Time Slept: </P> <DataP>{props.entry.total_time}</DataP> </InnerDiv>
-                    <InnerDiv> <P>Mood Score: </P> <DataP>{props.entry.mood_score === 1 ? <span>🙁</span> 
-                                                            : 
-                                                            props.entry.mood_score === 2 ? <span>😐</span>
-                                                            :
-                                                            props.entry.mood_score === 3 ? <span>🙂</span>
-                                                            :
-                                                            props.entry.mood_score === 4 ? <span>😃</span>
-                                                            :
-                                                            null}
-                    </DataP> </InnerDiv>
-                </>
-            }
-            { !editing ? <Button onClick={() => setEditing(!editing)}>Edit</Button> : 
-                <>
-                    <Button onClick={() => handleSubmit()}>Save Changes</Button> 
-                    <Button onClick={() => cancelChanges()}>Cancel</Button>
-                </>
-            }
-            <Button onClick={() => props.deleteEntry(props.entry.user_id,props.entry.id)}>Delete</Button>
+                <Button onClick={() => handleSubmit()}>Create Entry</Button> 
+                <Button onClick={() => cancelChanges()}>Cancel</Button>  
         </OuterDiv>
     )
 }
 
-export default connect(null,{ deleteEntry: deleteEntry, getUserEntries: getUserEntries, editEntry: editEntry })(Entries);
+export default connect((state) => {
+    return {
+        userId: state.userId
+    }
+}, { createEntry: createEntry })(AddEntry);
